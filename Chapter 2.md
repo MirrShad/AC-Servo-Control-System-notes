@@ -24,6 +24,7 @@
 ## 2.3 交流伺服电动机
 这里作者有个笔误，把无刷直流电动机也归类为交流伺服电动机里面了，我这里按照上一章的为准，交流伺服也分永磁同步交流伺服和感应式异步交流伺服
 ### 2.3.1 同步型交流伺服电动机
-
+![同步型交流伺服电动机简图](https://github.com/MirrShad/AC-Servo-Contorl-System-notes/blob/master/Images/Chapter2/%E6%B0%B8%E7%A3%81%E5%90%8C%E6%AD%A5%E4%BC%BA%E6%9C%8D%E7%94%B5%E6%9C%BA%E7%AE%80%E5%9B%BE.jpg)
 ### 2.3.2 感应型交流伺服电动机
 通过定子产生的旋转磁场与转子绕组的相对运动，转子绕组切割磁感线产生感应电动势，从而使转子绕组中产生感应电流。转子绕组中的感应电流与磁场作用，产生电磁转矩，使转子旋转。
+![感应型交流伺服电动机简图](https://github.com/MirrShad/AC-Servo-Contorl-System-notes/blob/master/Images/Chapter2/%E5%BC%82%E6%AD%A5%E7%94%B5%E6%9C%BA%E7%AE%80%E5%9B%BE.png)
