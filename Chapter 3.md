@@ -32,10 +32,48 @@ $$\begin{cases}
 		0&&\left | e(i) \right |>\delta			
 	\end{cases}$$
 ### 3.2.3 数字PI调节器举例
-我们可以简略地缩写三个算法  
-'''
-M_IntK = Mki * error1 + M_IntK
-Tempm = MKp * error1 + M_IntK
-'''
-
-https://blog.csdn.net/he_wen_jie/article/details/51106676
+出去积分限幅和输出限幅，以及对Q格式的处理，我们可以简略地缩写三个算法  
+```
+int ACMR_PI(){
+    M_IntK = Mki * error1 + M_IntK;
+    Tempm = MKp * error1 + M_IntK;
+}
+```
+```
+int ACTR_PI(){
+    T_IntK = Tki*error2 + T_IntK;
+    Tempt2 = Tkp * error2 + T_IntK;
+}
+```
+```
+int ASR_PI(){
+    S_IntK = Ski*error3+S_IntK;
+    Temps = Skp*error3+S_IntK;
+}
+```
+关于d-q轴的资料如下，之后会有介绍的，这个不是这章的重点  
+https://blog.csdn.net/he_wen_jie/article/details/51106676  
+## 3.3 PWM驱动信号
+### 3.3.1 三项互补的PWM驱动
+这段是关于STM32具体的配置方法，由于未必使用STM32所以就没有继续看下去
+### 3.3.2 无刷直流电动机的PWM驱动
+不使用无刷直流电机
+## 3.4 数字测速
+### 3.4.1 旋转编码器
+有两相A相和B相是为了辨别方向，两相相差了90度，正转时A相超前B相，反转时B相超前A相。
+书中的图3-7的横坐标是时间，所以不应该正转往左看，反转往右看
+### 3.4.2 数字测速方法的精度指标
+1. 分辨率
+被测转速变化是，能引起计数值改变的最小变化
+2. 测速误差率
+实际转速和测量值之差于实际值之比是测速误差率
+### 3.4.3 M法测速
+测量一个采样周期内旋转编码器的脉冲个数来算出转速
+$$n = \frac{60M_1}{zT_c}$$
+n是转速单位是r/min，$M_1$是时间$T_c$内的脉冲个数，z是旋转编码器每转输出的脉冲个数，$T_c$是采样周期，单位为s  
+分辨率为 
+$$(n+1)-n = \frac{60(M_1+1)}{zT_c}-\frac{60M_1}{zT_c}=\frac{60}{zT_c}$$
+由此可见，分辨率是个定值。  
+测速误差率，主要造成误差的地方只可能在采样脉冲和计数脉冲不一致上。所以误差率按照下面式子算出来
+$$\delta_{max} \% = \frac{{\frac{60M_1}{zT_c}}-{\frac{60(M_1-1)}{zT_c}}}{\frac{60M_1}{zT_c}}*100\%=\frac{1}{M_1}*100\%$$
+### 3.4.4 T法测速
